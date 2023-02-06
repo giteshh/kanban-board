@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -23,5 +24,9 @@ export class HomeComponent {
         event.currentIndex,
       );
     }
+  }
+
+  addTask() {
+    this.todo.push('');
   }
 }
