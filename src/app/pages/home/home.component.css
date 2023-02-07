@@ -10,28 +10,14 @@
   background-image: linear-gradient(#20DED3, #F6FBA2);
 }
 
-.navbar {
-  background-image: linear-gradient(#F9D976, #F39F86);
-  height: 30px;
+.logo {
+  height: 60px;
+  width: 200px;
   padding: 10px;
-}
-
-.app-name {
-  font-size: 25px;
-  font-weight: bold;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.has-gradient-text {
-  background: white;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .board {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
   min-width: 0;
   min-height: 0;
@@ -41,15 +27,6 @@
   display: flex;
   flex-grow: 1;
   overflow-x: auto;
-}
-
-.task-container {
-  background: white;
-  height: 500px;
-  min-width: 350px;
-  border-radius: 4px;
-  display: flex;
-  flex-grow: 1;
 }
 
 .board-columns {
@@ -63,7 +40,7 @@
   flex-direction: column;
   flex-grow: 1;
   flex-basis: 0;
-  margin: 40px;
+  margin: 5px 40px 30px 40px;
   padding: 20px;
   border-radius: 4px;
   background-color: rgba(240, 240, 240, 0.5);
@@ -87,7 +64,7 @@
   display: flex;
   font-size: 14px;
   padding: 12px 12px;
-  background: white;
+  background-color: rgba(240, 240, 240, 0.9);
   border-bottom: solid 1px #ddd;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -114,11 +91,49 @@
 .tasks-container.cdk-drop-list-dragging .task:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-.addTask{
+
+.addTask {
   display: flex;
   justify-content: flex-end;
   margin: 10px 20px;
 }
+
 .addTask button {
   background: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .logo {
+    height: 50px;
+    width: 180px;
+    padding: 8px;
+  }
+
+  .board-columns {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    opacity: 0.9;
+  }
+
+  .column-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    padding: 5px;
+  }
+
+  .task {
+    font-size: 12px;
+    padding: 8px 8px;
+    background-color: rgba(240, 240, 240, 0.9);
+    border-bottom: solid 1px #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.05),
+    0 3px 14px 2px rgba(0, 0, 0, 0.05);
+  }
+
 }
