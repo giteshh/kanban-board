@@ -1,6 +1,6 @@
 <div class="root">
 
-    <img src="assets/logo.png" class="logo">
+  <img src="assets/logo.png" class="logo">
 
 
   <div class="board">
@@ -9,36 +9,56 @@
         <div class="board-column">
           <div class="column-title">
             Todo
+            <button *ngIf="todo.length > 0" mat-mini-fab color="primary" aria-label="Example icon button with a home icon" class="btn-badge">
+              {{todo.length}}
+            </button>
           </div>
           <div
             cdkDropList
             #todoList="cdkDropList"
             [cdkDropListData]="todo"
-            [cdkDropListConnectedTo]="[inprogressList, doneList, futureideasList]"
+            [cdkDropListConnectedTo]="[inprogressList, doneList, futureIdeasList]"
             class="tasks-container"
             (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+            <div class="task" *ngFor="let item of todo; let i = index" cdkDrag>
+              {{item.description}}
+              <div>
+                <mat-icon matSuffix color="warn" (click)="deleteTodoTask(i)" class="delete-icon">delete</mat-icon>
+                <mat-icon matSuffix color="primary" (click)="editTask(item, i)">edit</mat-icon>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="board-column">
           <div class="column-title">
             In progress
+            <button *ngIf="inprogress.length > 0" mat-mini-fab color="primary" aria-label="Example icon button with a home icon" class="btn-badge">
+              {{inprogress.length}}
+            </button>
           </div>
           <div
             cdkDropList
             #inprogressList="cdkDropList"
             [cdkDropListData]="inprogress"
-            [cdkDropListConnectedTo]="[todoList, doneList, futureideasList]"
+            [cdkDropListConnectedTo]="[todoList, doneList]"
             class="tasks-container"
             (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let item of inprogress" cdkDrag>{{item}}</div>
+            <div class="task" *ngFor="let item of inprogress; let i = index" cdkDrag>
+              {{item.description}}
+              <div>
+                <mat-icon matSuffix color="warn" (click)="deleteinProgressTask(i)" class="delete-icon">delete</mat-icon>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="board-column">
           <div class="column-title">
             Done
+            <button *ngIf="done.length > 0" mat-mini-fab color="primary" class="btn-badge">
+              {{done.length}}
+            </button>
           </div>
           <div
             cdkDropList
@@ -47,22 +67,38 @@
             [cdkDropListConnectedTo]="[inprogressList, todoList]"
             class="tasks-container"
             (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let item of done" cdkDrag>{{item}}</div>
+            <div class="task" *ngFor="let item of done; let i = index" cdkDrag>
+              {{item.description}}
+              <div>
+                <mat-icon matSuffix color="warn" (click)="deleteDoneTask(i)" class="delete-icon">delete</mat-icon>
+                <mat-icon matSuffix color="primary" class="delete-icon">done_outline</mat-icon>
+              </div>
+            </div>
           </div>
         </div>
 
         <div class="board-column">
           <div class="column-title">
             Future Ideas
+            <button *ngIf="futureIdeas.length > 0" mat-mini-fab color="primary" class="btn-badge">
+              {{futureIdeas.length}}
+            </button>
           </div>
           <div
             cdkDropList
-            #futureideasList="cdkDropList"
-            [cdkDropListData]="futureideas"
+            #futureIdeasList="cdkDropList"
+            [cdkDropListData]="futureIdeas"
             [cdkDropListConnectedTo]="[inprogressList, todoList, doneList]"
             class="tasks-container"
             (cdkDropListDropped)="drop($event)">
-            <div class="task" *ngFor="let item of futureideas" cdkDrag>{{item}}</div>
+            <div class="task" *ngFor="let item of futureIdeas; let i = index" cdkDrag>
+              {{item.description}}
+              <div>
+                <mat-icon matSuffix color="warn" (click)="deletefutureIdeasTask(i)" class="delete-icon">
+                  delete
+                </mat-icon>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -70,10 +106,15 @@
     </div>
   </div>
 
-<!--  <div class="addTask">-->
-<!--    <button mat-fab (click)="addTask()">-->
-<!--      <mat-icon>add</mat-icon>-->
-<!--    </button>-->
-<!--  </div>-->
+  <div class="addTask">
+    <form class="example-form" [formGroup]="todoForm">
+      <mat-form-field class="example-full-width">
+        <input type="text" matInput formControlName="item" placeholder="Enter task name">
+
+        <mat-icon matSuffix *ngIf="!isEditEnabled && todoForm.valid" (click)="addTask()">add</mat-icon>
+        <mat-icon matSuffix *ngIf="isEditEnabled && todoForm.valid" (click)="updateTask()">edit</mat-icon>
+      </mat-form-field>
+    </form>
+  </div>
 </div>
 
