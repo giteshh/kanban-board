@@ -43,7 +43,7 @@
             cdkDropList
             #inprogressList="cdkDropList"
             [cdkDropListData]="inprogress"
-            [cdkDropListConnectedTo]="[todoList, doneList]"
+            [cdkDropListConnectedTo]="[todoList, doneList, futureIdeasList]"
             class="tasks-container"
             (cdkDropListDropped)="drop($event)">
             <div class="task" *ngFor="let item of inprogress; let i = index" cdkDrag>
@@ -111,10 +111,10 @@
   <div class="addTask">
     <form class="example-form" [formGroup]="todoForm">
       <mat-form-field class="example-full-width">
-        <input type="text" matInput formControlName="item" placeholder="Enter task name">
+        <input type="text" matInput formControlName="item" placeholder="Enter task name" (keydown.enter)="'isEditEnabled' ? addTask($event) : updateTask($event)">
 
-        <mat-icon matSuffix *ngIf="!isEditEnabled && todoForm.valid" (click)="addTask()">add</mat-icon>
-        <mat-icon matSuffix *ngIf="isEditEnabled && todoForm.valid" (click)="updateTask()">edit</mat-icon>
+        <mat-icon matSuffix *ngIf="!isEditEnabled && todoForm.valid" (click)="addTask($event)">add</mat-icon>
+        <mat-icon matSuffix *ngIf="isEditEnabled && todoForm.valid" (click)="updateTask($event)">edit</mat-icon>
       </mat-form-field>
     </form>
   </div>
