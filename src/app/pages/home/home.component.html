@@ -111,10 +111,10 @@
   <div class="addTask">
     <form class="example-form" [formGroup]="todoForm">
       <mat-form-field class="example-full-width">
-        <input type="text" matInput formControlName="item" placeholder="Enter task name" (keydown.enter)="'isEditEnabled' ? addTask($event) : updateTask($event)">
+        <input type="text" matInput formControlName="item" placeholder="Enter task name" (keydown.enter)="addTask($event)">
 
         <mat-icon matSuffix *ngIf="!isEditEnabled && todoForm.valid" (click)="addTask($event)">add</mat-icon>
-        <mat-icon matSuffix *ngIf="isEditEnabled && todoForm.valid" (click)="updateTask($event)">edit</mat-icon>
+        <mat-icon matSuffix *ngIf="isEditEnabled && todoForm.valid" (click)="updateTask()">edit</mat-icon>
       </mat-form-field>
     </form>
   </div>
